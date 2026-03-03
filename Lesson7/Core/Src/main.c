@@ -24,7 +24,6 @@ void EXTI4_15_IRQHandler(void)
     {
         portAPin11Counter++;
         EXTI->PR |= EXTI_PR_PR11;
-        EXTI->PR |= EXTI_PR_PR11;
     }
 }
 
