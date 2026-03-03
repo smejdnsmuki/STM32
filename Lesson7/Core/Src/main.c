@@ -12,6 +12,7 @@ void EXTI4_15_IRQHandler(void)
     // EXTI->PR = Pending Register → shows which EXTI line triggered interrupt
     // EXTI_PR_PR15 = bit corresponding to EXTI line 15
     // If set → interrupt came from line 15 (PA15)
+    	//Small Change
     {
         portAPin15Counter++;	// Increment event counter
 
