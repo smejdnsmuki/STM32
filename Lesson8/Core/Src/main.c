@@ -4,6 +4,22 @@
 
 void SystemClock_Config(void);
 
+void I2C_StartWrite(int Number_of_Bytes_to_write)
+{
+	 I2C1->CR2 &= ~I2C_CR2_RD_WRN;
+	 I2C1->CR2 |= (Number_of_Bytes_to_write << 16);
+	 I2C1 ->CR2 |= I2C_CR2_START;
+	 while(I2C1 ->CR2 & I2C_CR2_START);
+}
+
+void I2C_StartRead(int Number_of_Bytes_to_read)
+{
+	 I2C1->CR2 &= ~I2C_CR2_RD_WRN;
+	 I2C1->CR2 |= (Number_of_Bytes_to_read << 16);
+	 I2C1 ->CR2 |= I2C_CR2_START;
+	 while(I2C1 ->CR2 & I2C_CR2_START);
+}
+
 int main(void)
 {
 
@@ -139,14 +155,13 @@ int main(void)
 
 	 while(!(I2C1 ->ISR & I2C_ISR_TXE));
 
+	 I2C1->CR2 |= I2C_CR2_RD_WRN;
 
 	 // ------------------------------------------------
 	 // Generate STOP condition
 	 // Ends the I2C communication
 	 // ------------------------------------------------
-
 	 I2C1 ->CR2 |= I2C_CR2_STOP;
-
 
 	 // Wait until STOP condition is cleared
 	 while(I2C1 ->CR2 & I2C_CR2_STOP);
