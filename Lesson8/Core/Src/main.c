@@ -10,6 +10,7 @@ void I2C_StartWrite(int Number_of_Bytes_to_write)
 	 I2C1->CR2 |= (Number_of_Bytes_to_write << 16);
 	 I2C1 ->CR2 |= I2C_CR2_START;
 	 while(I2C1 ->CR2 & I2C_CR2_START);
+
 }
 
 void I2C_StartRead(int Number_of_Bytes_to_read)
